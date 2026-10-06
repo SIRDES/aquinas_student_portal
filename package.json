@@ -1,0 +1,54 @@
+{
+  "name": "aquinas_students_portal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.4.2",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.15.19",
+    "@mui/x-date-pickers": "^8.5.3",
+    "@react-pdf/renderer": "^4.3.0",
+    "axios": "^1.7.2",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
+    "dayjs": "^1.11.13",
+    "file-saver": "^2.0.5",
+    "formidable": "^3.5.2",
+    "mongoose": "^8.9.2",
+    "next": "15.1.11",
+    "next-auth": "^4.24.11",
+    "pdfjs-dist": "^5.3.31",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.8",
+    "react-hook-form": "^7.51.5",
+    "react-paystack": "^6.0.0",
+    "react-pdf": "10.0.1",
+    "react-phone-number-input": "^3.4.3",
+    "react-to-print": "^3.0.6",
+    "sweetalert2": "^11.22.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/formidable": "^3",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5"
+  },
+  "resolutions": {
+    "@react-pdf/image": "3.0.4"
+  },
+  "packageManager": "yarn@4.7.0+sha512.5a0afa1d4c1d844b3447ee3319633797bcd6385d9a44be07993ae52ff4facabccafb4af5dcd1c2f9a94ac113e5e9ff56f6130431905884414229e284e37bb7c9"
+}
