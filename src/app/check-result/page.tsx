@@ -172,7 +172,7 @@ export default function CheckResultPage() {
             : watch("momoNetwork") === "TELECEL"
               ? "Vodafone"
               : "MTN",
-        amount: selectedExamData?.isSemester ? "10.00" : "5.00",
+        // amount: selectedExamData?.isSemester ? "10.00" : "5.00",
         batchId: watch("exam"),
         shortDescription: "Aquinas SHS",
         examType: selectedExamData?.isSemester

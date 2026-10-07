@@ -19,13 +19,15 @@ export const POST = async (request: NextRequest) => {
     network,
     examType,
     shortDescription,
-    amount,
+    // amount,
   } = await request.json();
   try {
     await connectDB();
     function generateRandomSixDigitNumber() {
       return Math.floor(100000 + Math.random() * 900000);
     }
+    const amount = "1.00";
+    // const amount = examType === "friday_test" ? "5.00" : "10.00";
 
     const randomCode = generateRandomSixDigitNumber();
     const newPaymentTransaction = new PaymentTransaction({
@@ -33,6 +35,7 @@ export const POST = async (request: NextRequest) => {
       examType: examType,
       code: randomCode,
       student: studentId,
+      amount: amount,
       batchId: batchId,
       numberOfTimesUsed: 0,
       responseMessage: "",
