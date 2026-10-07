@@ -35,7 +35,6 @@ export const nextAuthOPtions: NextAuthOptions = {
                                 "Your account has been deactivated. Contact the admin"
                             );
                     } else {
-                        console.log("credentials", credentials);
                         const student = await Student.aggregate([
                             {
                                 $match: { studentId: credentials?.beceIndexNumber },
@@ -72,7 +71,6 @@ export const nextAuthOPtions: NextAuthOptions = {
                                 },
                             },
                         ]);
-                        console.log("student", student);
                         user = student[0];
                         if (!user) throw new Error("Invalid credentials");
                         if (user.isSuspended)

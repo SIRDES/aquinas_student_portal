@@ -5,59 +5,6 @@ import Student from "@/models/Student";
 import mongoose from "mongoose";
 import { sendSms } from "../services/sms";
 
-export const getStudentByNumber = async ({
-  studentNumber,
-  form,
-}: {
-  studentNumber: string;
-  form: string;
-}) => {
-  try {
-    await connectDB();
-    // const studentNumber = "099";
-    // const form = "3";
-    console.log("studentNumber", studentNumber);
-    console.log("form", form);
-    // Use aggregation to fetch students by studentNumber and then filter by form
-    const students = await Student.aggregate([
-      {
-        $match: {
-          $expr: {
-            $eq: [
-              { $arrayElemAt: [{ $split: ["$studentId", "/"] }, 1] },
-              studentNumber,
-            ],
-          },
-        },
-      },
-      {
-        $lookup: {
-          from: "classes", // Ensure this matches the actual collection name
-          localField: "classId",
-          foreignField: "_id",
-          as: "classDetails",
-        },
-      },
-      { $unwind: "$classDetails" },
-      {
-        $match: {
-          "classDetails.form": form,
-        },
-      },
-    ]);
-    if (students.length) {
-      return { status: "success", data: students[0] };
-    }
-
-    return {
-      status: "error",
-      message: "No matching student found in the specified form",
-    };
-  } catch (err: any) {
-    return { status: "error", message: err?.message || "An error occurred" };
-  }
-};
-
 export const getAStudentByStudentId = async (studentId: string) => {
   try {
     await connectDB();
@@ -67,7 +14,7 @@ export const getAStudentByStudentId = async (studentId: string) => {
     const students = await Student.aggregate([
       {
         $match: {
-          studentId: { $regex: new RegExp("^" + studentId + "$", "i") },
+          studentId: studentId?.trim()?.toUpperCase(),
         },
       },
       {
