@@ -26,8 +26,8 @@ export const POST = async (request: NextRequest) => {
     function generateRandomSixDigitNumber() {
       return Math.floor(100000 + Math.random() * 900000);
     }
-    const amount = "1.00";
-    // const amount = examType === "friday_test" ? "5.00" : "10.00";
+    // const amount = "1.00";
+    const amount = examType === "friday_test" ? "5.00" : "10.00";
 
     const randomCode = generateRandomSixDigitNumber();
     const newPaymentTransaction = new PaymentTransaction({
