@@ -71,13 +71,15 @@ const StyledNavItem = styled(
   },
 }));
 
-export default function DashboardSideNav({
+export default function AdmissionDashboardSideNav({
   sideNavWidth,
   setSideNavWidth,
   navLists,
+  userType,
 }: {
   sideNavWidth: string;
   setSideNavWidth: React.Dispatch<React.SetStateAction<string>>;
+  userType: string;
   navLists: {
     id: number;
     name: string;
@@ -103,6 +105,11 @@ export default function DashboardSideNav({
   // const sideNavWidth = "247px";
 
   const [loading, setLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState<SnackbarType>({
+    open: false,
+    message: "",
+    severity: undefined,
+  });
   const handleClick = () => {
     setSideNavWidth(isMobileNav ? "247px" : "80px");
     setISMobileNav((prev: boolean) => !prev);
@@ -134,6 +141,10 @@ export default function DashboardSideNav({
   const handleBatchClose = () => {
     setBatchAnchorEl(null);
   };
+  // const handleBatchClick = (batch: any) => {
+  //   setSelectedBatch(batch);
+  //   handleBatchClose();
+  // };
 
   const handleLogout = () => {
     try {
@@ -150,6 +161,12 @@ export default function DashboardSideNav({
   return (
     <>
       <LoadingAlert open={loading} />
+      {/* <ProgressAlert
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        setOpen={setSnackbar}
+      /> */}
       <MobileNavMenu navLists={navLists} />
       <Box
         sx={{
@@ -251,7 +268,7 @@ export default function DashboardSideNav({
           </Box>
         )}
 
-        {/* <IconButton
+        <IconButton
           style={{
             backgroundColor: theme.palette.background.paper,
             position: "absolute",
@@ -267,7 +284,7 @@ export default function DashboardSideNav({
           ) : (
             <ArrowBackIosNewIcon sx={{ fontSize: "inherit" }} />
           )}
-        </IconButton> */}
+        </IconButton>
         <Box
           sx={{
             position: "absolute",

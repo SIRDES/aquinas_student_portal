@@ -250,36 +250,6 @@ export const getPlacedStudentByStudentId = async (studentId: string) => {
   }
 };
 
-export const addSubjectToStudent = async ({ _id, subjectsId, parentPhoneNumber }: { _id: string, subjectsId: Array<string>, parentPhoneNumber: string }) => {
-  try {
-    await connectDB();
-
-    const result = await Student.updateOne(
-      { _id: new mongoose.Types.ObjectId(_id) }, // Find student by ID
-      {
-        // $addToSet: {
-        //   subjects: { $each: subjectsId }, // Add all subject IDs to the subjects array
-        // },
-        $set: {
-          parentPhoneNumber: parentPhoneNumber, // Update the ssId field
-        },
-      }
-    );
-
-    // const result = await Student.updateOne(
-    //   { ssId: studentId }, // Find student by ID
-    //   {
-    //     $addToSet: {
-    //       subjects: { $each: subjectsId }, // Add all subject IDs to the subjects array
-    //     },
-    //   }
-    // );
-
-    return { status: "success", data: JSON.parse(JSON.stringify(result)) };
-  } catch (err: any) {
-    return { status: "error", message: err?.message || "An error occurred" };
-  }
-};
 
 export const getStudentResultsWithPaymentId = async ({
   transaction_id,

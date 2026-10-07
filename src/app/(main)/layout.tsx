@@ -1,7 +1,7 @@
 "use client";
-import AdmissionDashboardSideNav from "@/components/AdmissionDashboardSideNav";
+import DashboardSideNav from "@/components/DashboardSideNav";
 import LoadingAlert from "@/components/LoadingAlert";
-import { admissionNavLists } from "@/utils/navList";
+import { studentsNavLists } from "@/utils/navList";
 import { Box, Stack } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -31,11 +31,10 @@ export default function AdmissionLayout({
     // }
     return (
         <Stack direction={{ sm: "column", md: "row" }} sx={{ minHeight: "100vh" }}>
-            <AdmissionDashboardSideNav
+            <DashboardSideNav
                 sideNavWidth={sideNavWidth}
                 setSideNavWidth={setSideNavWidth}
-                userType="admin"
-                navLists={admissionNavLists}
+                navLists={studentsNavLists}
             />
             <Box
                 sx={{

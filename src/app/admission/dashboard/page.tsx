@@ -18,16 +18,7 @@ import { saveAs } from "file-saver";
 import ParentalCommitmentForm from "@/components/ParentalConsentForm";
 import { showAlert } from "@/components/Alerts";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-// const StyledCard = styled(Card)(({ theme }) => ({
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     color: theme.palette.primary.main,
-//     height: "100px",
-//     padding: "20px",
-//     boxShadow: " 0px 1px 6px 0px #D0CDE1",
-// }));
+
 export default function Dashboard() {
     const theme = useTheme();
     const { adminSettings } = useAdminSettings();

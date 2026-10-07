@@ -44,11 +44,11 @@ export const admissionNavLists = [
 ];
 
 export const studentsNavLists = [
-    {
-        id: 1,
-        name: "Announcements",
-        href: "/announcements",
-    },
+    // {
+    //     id: 1,
+    //     name: "Announcements",
+    //     href: "/announcements",
+    // },
     {
         id: 2,
         name: "Personal Details",
@@ -57,13 +57,13 @@ export const studentsNavLists = [
     {
         id: 3,
         name: "Statement of results",
-        href: "/statements-of-results",
+        href: "/statement-of-results",
     },
-    {
-        id: 4,
-        name: "Files",
-        href: "/files",
-    },
+    // {
+    //     id: 4,
+    //     name: "Files",
+    //     href: "/files",
+    // },
     // {
     //   id: 4,
     //   name: "Audit",

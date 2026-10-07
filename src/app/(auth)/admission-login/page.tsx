@@ -66,6 +66,7 @@ export default function Login() {
       const res = await signIn("credentials", {
         beceIndexNumber: dat.email,
         admissionCode: dat.password,
+        loginType: "admission",
         callbackUrl: "/admission/dashboard",
         redirect: false,
       });

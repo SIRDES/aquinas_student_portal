@@ -19,11 +19,12 @@ import LoadingAlert from "../../../components/LoadingAlert";
 import { showAlert } from "../../../components/Alerts";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+
 const schema = Yup.object().shape({
   email: Yup.string().required("Student number is required"),
   password: Yup.string().required("Password is required"),
 });
-export interface FormData extends Yup.InferType<typeof schema> {}
+export interface FormData extends Yup.InferType<typeof schema> { }
 
 export default function Login() {
   const theme = useTheme();
@@ -52,13 +53,13 @@ export default function Login() {
     try {
       setLoading(true);
       const res = await signIn("credentials", {
-        beceIndexNumber: dat.email,
-        admissionCode: dat.password,
-        callbackUrl: "/admission/dashboard",
+        beceIndexNumber: dat.email.trim().toUpperCase(),
+        admissionCode: dat.password.trim(),
+        callbackUrl: "/personal-details",
         redirect: false,
       });
       if (res?.error === null) {
-        router.push("/admission/dashboard");
+        router.push("/personal-details");
       } else {
         showAlert({
           title: "Error",
@@ -85,7 +86,7 @@ export default function Login() {
     //   router.push("/dashboard");
     //   return;
     // }
-    router.push("/admission/dashboard");
+    router.push("/personal-details");
     return;
   }
   return (
@@ -134,7 +135,7 @@ export default function Login() {
                 sx={{ fontWeight: 700 }}
                 gutterBottom
               >
-                AQUINAS PORTAL
+                AQUINAS STUDENT PORTAL
               </Typography>
             </Box>
             {/* Email */}
@@ -166,7 +167,6 @@ export default function Login() {
               <TextField
                 fullWidth
                 variant="standard"
-                // type="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 InputProps={{
@@ -175,7 +175,7 @@ export default function Login() {
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
-                        // onMouseDown={handleMouseDownPassword}
+                      // onMouseDown={handleMouseDownPassword}
                       >
                         {showPassword ? (
                           <VisibilityIcon />

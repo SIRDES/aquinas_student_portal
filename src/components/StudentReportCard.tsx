@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 30,
     // fontFamily: "Times New Roman",
-    fontSize: 12,
+    fontSize: 11,
   },
   header: {
     display: "flex",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   reportTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 5,
@@ -400,6 +400,9 @@ const StudentReportCard: React.FC<StudentReportCardProps> = ({ data }) => (
           </Text>
           <Text style={styles.schoolAddress}>
             E-mail : aquinasshs.2014@yahoo.com
+          </Text>
+          <Text style={styles.schoolAddress}>
+            Website : www.staquinasshs.org
           </Text>
           <Text style={styles.schoolAddress}>Digital Address: GL-044-9893</Text>
           {/* Report Title */}
