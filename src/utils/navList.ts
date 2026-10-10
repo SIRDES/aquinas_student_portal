@@ -59,11 +59,11 @@ export const studentsNavLists = [
         name: "Statement of results",
         href: "/statement-of-results",
     },
-    // {
-    //     id: 4,
-    //     name: "Files",
-    //     href: "/files",
-    // },
+    {
+        id: 4,
+        name: "Result sheet",
+        href: "/result-sheet",
+    },
     // {
     //   id: 4,
     //   name: "Audit",

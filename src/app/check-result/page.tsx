@@ -110,9 +110,11 @@ export default function CheckResultPage() {
     e.preventDefault();
     if (!watchStudentNumber) return;
 
+    const cleanedStudentNumber = watchStudentNumber.replace(/\s+/g, "");
+
     setIsLoading(true);
     try {
-      const response = await getAStudentByStudentId(watchStudentNumber?.trim());
+      const response = await getAStudentByStudentId(cleanedStudentNumber);
       if (!response.success) {
         showAlert({
           title: "Error",
