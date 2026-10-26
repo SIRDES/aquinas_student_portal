@@ -29,6 +29,9 @@ import { pdf } from "@react-pdf/renderer";
 
 import { saveAs } from "file-saver";
 import PDFFileViewer from "@/components/PdfViewer";
+import ExamsPaymentDialog from "@/components/payment/ExamsPaymentDialog";
+import axios from "axios";
+import ConfirmationPaymentDialog from "@/components/payment/ConfirmationPaymentDialog";
 
 export default function StatementOfResults() {
     const { data: session, status } = useSession();
@@ -36,9 +39,16 @@ export default function StatementOfResults() {
     const studentData = session?.user;
     const [fetchedExams, setFetchedExams] = useState<any[]>([]);
     const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
+    const [openConfirmationPaymentDialog, setOpenConfirmationPaymentDialog] = useState<boolean>(false);
     const [selectedExamData, setSelectedExamData] = useState<any>(null);
     const [studentResultsData, setStudentResultsData] = useState<any>(null);
     const [reportFile, setReportFile] = useState<Blob | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [momoDetails, setMomoDetails] = useState<{
+        momoNumber: string;
+        momoNetwork: string;
+        momoName: string;
+    } | null>(null);
 
     //     _id: '685a8b01636aea0e5a6608d8',
     //         parentEmail: '',
@@ -263,16 +273,18 @@ export default function StatementOfResults() {
             }
             setLoading(true);
             setStudentResultsData(null);
-
-
+            setReportFile(null);
 
             const response = await checkPaymentMadeForStudent({
                 studentId: studentData?._id as string,
                 batchId: selectedExamData?._id,
             });
+
+            // console.log("checkPaymentMadeForStudent response ", response)
+
             if (response.success) {
                 const data = response.data;
-                console.log("payment result data", data)
+                // console.log("payment result data", data)
                 // setPaymentData(data);
                 await handleFetchData(data._id);
 
@@ -297,6 +309,7 @@ export default function StatementOfResults() {
                 });
             }
         } catch (error) {
+            // console.log("error", error)
             showAlert({
                 title: "Error",
                 severity: "error",
@@ -370,9 +383,37 @@ export default function StatementOfResults() {
         const blob = await pdf(<StudentReportCard data={studentResultsData} />).toBlob();
         saveAs(blob, `${studentName?.trim()} report.pdf`);
     };
+
+
+    const handleOpenConfirmMakePayment = async (data: {
+        momoNumber: string;
+        momoNetwork: string;
+        momoName: string;
+    }) => {
+        // console.log(data);
+        setMomoDetails(data)
+        setShowPaymentForm(false)
+        setOpenConfirmationPaymentDialog(true)
+    };
+
     return (
         <>
             <LoadingAlert open={loading} />
+            <ExamsPaymentDialog open={showPaymentForm} handleClose={() => setShowPaymentForm(false)} handleMakePayment={(data) => handleOpenConfirmMakePayment(data)} />
+
+            <ConfirmationPaymentDialog open={openConfirmationPaymentDialog} onClose={() => setOpenConfirmationPaymentDialog(false)} handleConfirmation={() => { }} ConfirmPaymentData={{
+                studentNumber: studentData?.studentId || "",
+                studentName: `${studentData?.firstName} ${studentData?.lastName}`?.toUpperCase()?.trim() || "",
+                className: `${studentData?.classInfo?.form} ${studentData?.classInfo?.name}`?.toUpperCase()?.trim() || "",
+                examName: selectedExamData?.name?.toUpperCase()?.trim() || "",
+                momoNumber: momoDetails?.momoNumber || "",
+                momoNetwork: momoDetails?.momoNetwork || "",
+                momoName: momoDetails?.momoName || "",
+                studentId: studentData?._id || "",
+                examId: selectedExamData?._id || "",
+                isSemester: selectedExamData?.isSemester || false,
+            }} />
+
             <Box sx={{ pt: 1, px: { xs: 1, sm: 1, md: 4 } }}>
                 <Typography variant="h6" gutterBottom>
                     Statement of results

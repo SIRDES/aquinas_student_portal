@@ -37,7 +37,7 @@ import { getBatchByYearGroup } from "@/utils/serverActions/fridayTestBatch";
 import { checkPaymentMadeForStudent } from "@/utils/serverActions/paymentTransaction";
 import { getAccountName } from "@/utils/services/makePayment";
 import axios from "axios";
-import "react-phone-number-input/style.css";
+// import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import Link from "next/link";
 import LoadingAlert from "@/components/LoadingAlert";

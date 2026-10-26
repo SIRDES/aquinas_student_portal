@@ -15,7 +15,7 @@ export default function PDFFileViewer({ file }: PDFViewerProps) {
     const [numPages, setNumPages] = useState<number | null>(null);
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-        console.log('Number of pages: ', numPages);
+        // console.log('Number of pages: ', numPages);
         setNumPages(numPages);
     }
 

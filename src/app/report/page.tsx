@@ -22,6 +22,7 @@ function ReportContent() {
   const [reportFile, setReportFile] = useState<Blob | null>(null);
   const handleFetchData = async () => {
     setLoading(true);
+    setReportFile(null)
     try {
       if (!token) {
         showAlert({
@@ -64,14 +65,12 @@ function ReportContent() {
   useEffect(() => {
     if (data) {
       setStudentName(
-        `${
-          data?.studentInfo?.firstName
-            ? data?.studentInfo?.firstName?.toUpperCase()
-            : ""
-        }_${
-          data?.studentInfo?.lastName
-            ? data?.studentInfo?.lastName?.toUpperCase()
-            : ""
+        `${data?.studentInfo?.firstName
+          ? data?.studentInfo?.firstName?.toUpperCase()
+          : ""
+        }_${data?.studentInfo?.lastName
+          ? data?.studentInfo?.lastName?.toUpperCase()
+          : ""
         }`
       );
     }

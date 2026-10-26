@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
     batchId,
     network,
     examType,
-    shortDescription,
+    // shortDescription,
     // amount,
   } = await request.json();
   try {
@@ -48,7 +48,7 @@ export const POST = async (request: NextRequest) => {
       vendor: network === "airteltigo" ? "tigo" : network,
       number: msisdn,
       transactionId: newPaymentTransaction._id.toString(),
-      shortDescription: shortDescription,
+      shortDescription: "Aquinas SHS",
       amount,
       callback: NPOINTU_CALLBACK_URL || "",
       // amount: "1.00",

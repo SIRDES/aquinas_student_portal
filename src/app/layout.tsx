@@ -4,7 +4,7 @@ import SessionContextProvider from "@/context/AuthContext";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "@/theme/theme";
 import { StudentContextProvider } from "@/context/StudentDetailsContext";
-
+import "react-phone-number-input/style.css";
 export const metadata: Metadata = {
   title: "AQ Portal",
   description: "Aquinas SHS students portal",
