@@ -24,7 +24,9 @@ const sendSms = async (body: SmsPayload) => {
     sender: SMS_SENDER,
     message: body.message,
     recipients: body.recipients,
+    callback_url: `${process.env.NEXT_PUBLIC_ARKESEL_SMS_CALLBACK_BASE_URL}/api/sms-callback`,
   };
+
   const mnofityData = {
     'recipient': body.recipients,
     'sender': SMS_SENDER,
@@ -63,59 +65,59 @@ const sendSms = async (body: SmsPayload) => {
   }
 };
 
-const sendTemplateSms = async (body: SmsPayload) => {
-  const data = {
-    sender: SMS_SENDER,
-    message: body.message,
-    recipients: body.recipients,
-  };
+// const sendTemplateSms = async (body: SmsPayload) => {
+//   const data = {
+//     sender: SMS_SENDER,
+//     message: body.message,
+//     recipients: body.recipients,
+//   };
 
-  const config: AxiosRequestConfig = {
-    method: "post",
-    url: "https://sms.arkesel.com/api/v2/sms/template/send",
-    headers,
-    data: data,
-  };
+//   const config: AxiosRequestConfig = {
+//     method: "post",
+//     url: "https://sms.arkesel.com/api/v2/sms/template/send",
+//     headers,
+//     data: data,
+//   };
 
-  try {
-    const response = await axios(config);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+//   try {
+//     const response = await axios(config);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
 
-export const sendSMSWithCallbackUrl = async ({
-  parentPhoneNumber,
-  content,
-  callback_url,
-}: {
-  parentPhoneNumber: string;
-  content: string;
-  callback_url: string;
-}) => {
-  try {
-    // console.log("headersList", headersList);
-    let bodyContent = JSON.stringify({
-      sender: SMS_SENDER,
-      message: content,
-      recipients: parentPhoneNumber,
-      callback_url: callback_url,
-    });
+// export const sendSMSWithCallbackUrl = async ({
+//   parentPhoneNumber,
+//   content,
+//   callback_url,
+// }: {
+//   parentPhoneNumber: string;
+//   content: string;
+//   callback_url: string;
+// }) => {
+//   try {
+//     // console.log("headersList", headersList);
+//     let bodyContent = JSON.stringify({
+//       sender: SMS_SENDER,
+//       message: content,
+//       recipients: parentPhoneNumber,
+//       callback_url: callback_url,
+//     });
 
-    let reqOptions = {
-      url: "https://sms.arkesel.com/api/v2/sms/send",
-      method: "POST",
-      headers,
-      data: bodyContent,
-    };
-    let response = await axios.request(reqOptions);
-    // console.log("sendMessage ok res", response.data);
-    return response.data;
-  } catch (error: any) {
-    console.log("sendMessage error res", error);
-    console.log("sendMessage error res data", error.response.data);
-    return error?.response?.data;
-  }
-};
+//     let reqOptions = {
+//       url: "https://sms.arkesel.com/api/v2/sms/send",
+//       method: "POST",
+//       headers,
+//       data: bodyContent,
+//     };
+//     let response = await axios.request(reqOptions);
+//     // console.log("sendMessage ok res", response.data);
+//     return response.data;
+//   } catch (error: any) {
+//     console.log("sendMessage error res", error);
+//     console.log("sendMessage error res data", error.response.data);
+//     return error?.response?.data;
+//   }
+// };
 
-export { sendSms, sendTemplateSms };
+export { sendSms };
