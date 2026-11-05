@@ -16,6 +16,7 @@ declare module "next-auth" {
     parentPhoneNumber: string;
     parentFirstName: string;
     parentLastName: string;
+    profileImage?: string;
     dob: Date;
     gender: string;
     subjects: string[];

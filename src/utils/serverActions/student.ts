@@ -5,7 +5,49 @@ import Student from "@/models/Student";
 import mongoose from "mongoose";
 import { sendSms } from "../services/sms";
 
+export const updateStudentParentDetails = async ({
+  id,
+  parentFirstName,
+  parentLastName,
+  parentEmail,
+}: {
+  id: string;
+  parentFirstName?: string;
+  parentLastName?: string;
+  parentEmail?: string;
+}) => {
+  try {
+    await connectDB();
+    const updateData: { [key: string]: any } = {};
+    if (parentFirstName !== undefined) updateData.parentFirstName = parentFirstName.trim();
+    if (parentLastName !== undefined) updateData.parentLastName = parentLastName.trim();
+    if (parentEmail !== undefined) updateData.parentEmail = parentEmail.trim().toLowerCase();
+
+    const updatedStudent = await Student.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true }
+    );
+
+    if (!updatedStudent) {
+      return { success: false, message: "Student not found" };
+    }
+
+    return {
+      success: true,
+      message: "Parent details updated successfully",
+      data: JSON.parse(JSON.stringify(updatedStudent)),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || "Failed to update parent details",
+    };
+  }
+};
+
 export const getAStudentByStudentId = async (studentId: string) => {
+
   try {
     await connectDB();
     // console.log("studentId", studentId);
