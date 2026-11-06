@@ -13,7 +13,20 @@ const nextConfig = {
         return config;
     },
     images: {
-        domains: ['res.cloudinary.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.r2.cloudflarestorage.com',
+            },
+            {
+                protocol: 'https',
+                hostname: '*r2.dev',
+            },
+        ],
     },
     experimental: {
         serverActions: {
