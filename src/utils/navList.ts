@@ -64,9 +64,9 @@ export const studentsNavLists = [
         name: "Result sheet",
         href: "/result-sheet",
     },
-    // {
-    //   id: 4,
-    //   name: "Audit",
-    //   href: "/settings/myAccount",
-    // },
+    {
+        id: 5,
+        name: "Change Password",
+        href: "/change-password",
+    },
 ];

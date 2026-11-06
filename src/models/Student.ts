@@ -95,7 +95,7 @@ const studentSchema = new mongoose.Schema<IStudent>(
     },
     beceIndexNumber: {
       type: String,
-      required: true,
+      // required: true,
     },
     placeOfBirth: {
       type: String,

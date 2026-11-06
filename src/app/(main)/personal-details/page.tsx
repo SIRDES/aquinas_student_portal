@@ -1,20 +1,13 @@
 "use client";
-import React, { FC, SyntheticEvent, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Box from "@mui/material/Box";
 import {
     Typography,
-    useTheme,
     Button,
-    MenuItem,
     TextField,
-    Select,
     Grid,
-    Autocomplete,
-    AutocompleteChangeReason,
-    AutocompleteChangeDetails,
     Divider,
-    IconButton,
     Chip,
     Paper,
     Dialog,
@@ -24,35 +17,13 @@ import {
     CircularProgress,
 } from "@mui/material";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { InferType, date, number, object, string } from "yup";
-// import "react-phone-number-input/style.css";
-import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input";
-import { useForm } from "react-hook-form";
+import { formatPhoneNumberIntl } from "react-phone-number-input";
 import LoadingAlert from "@/components/LoadingAlert";
-import { useRouter } from "next/navigation";
-import { SnackbarType } from "@/types/commonTypes";
-
-import { CustomizedSelect } from "@/components/CustomizedSelect";
-
-import { useBatchesContext } from "@/context/BatchesContext";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import axios from "axios";
-import ImagesDropzone, { FileType } from "@/components/ImageDropZone";
-import regionsAndDistricts from "@/utils/regionAndDistricts.json"
-import uploadFile, { deleteFile } from "@/utils/services/cloudinaryUpload";
 import { signOut, useSession } from "next-auth/react";
-import { getPlacedStudentById, updatePlacedStudent } from "@/utils/serverActions/placedStudent";
 import { updateStudentParentDetails } from "@/utils/serverActions/student";
-import PersonalDetailsCompleted from "@/components/PersonalDetailsCompleted";
 import EditIcon from '@mui/icons-material/Edit';
 import { showAlert } from "@/components/Alerts";
 import Image from "next/image";
-import dayjs, { Dayjs } from "dayjs";
-import { PickerValue } from "@mui/x-date-pickers/internals";
 
 
 

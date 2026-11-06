@@ -4,6 +4,7 @@ import PaymentTransaction from "@/models/PaymentTransaction";
 import Student from "@/models/Student";
 import mongoose from "mongoose";
 import { sendSms } from "../services/sms";
+import { requireAuth } from "../auth";
 
 export const updateStudentParentDetails = async ({
   id,
@@ -373,3 +374,31 @@ export const sendStudentResultsWithPaymentId = async ({
     };
   }
 };
+
+
+export const changePassword = async ({ oldPassword, password }: { password: string, oldPassword: string }) => {
+  try {
+    const currentuser = await requireAuth();
+    await connectDB();
+
+    const user = await Student.findById(currentuser?._id);
+    if (!user) {
+      return { success: false, message: "User not found" };
+    }
+
+    const isPasswordValid = await user.comparePassword(oldPassword);
+
+    if (!isPasswordValid) {
+      return { success: false, message: "Wrong Old password" };
+    }
+
+    user.password = password;
+    await user.save();
+
+    return { success: true, data: JSON.parse(JSON.stringify(user)), message: "Password changed successfully. You'll need to login again." };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+}
+
