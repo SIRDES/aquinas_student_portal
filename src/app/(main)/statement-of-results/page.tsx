@@ -260,10 +260,10 @@ export default function StatementOfResults() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [studentData?.yearGroup]);
 
-    const checkPaymentStatus = async () => {
+    const checkPaymentStatus = async (exam: any) => {
         try {
 
-            if (!selectedExamData?._id) {
+            if (!exam?._id) {
                 showAlert({
                     title: "Error",
                     severity: "error",
@@ -277,7 +277,7 @@ export default function StatementOfResults() {
 
             const response = await checkPaymentMadeForStudent({
                 studentId: studentData?._id as string,
-                batchId: selectedExamData?._id,
+                batchId: exam?._id,
             });
 
             // console.log("checkPaymentMadeForStudent response ", response)
@@ -293,7 +293,7 @@ export default function StatementOfResults() {
                 showAlert({
                     title: "Payment Required",
                     severity: "warning",
-                    text: `You need to make payment of GHS ${selectedExamData?.isSemester ? "10.00" : "5.00"
+                    text: `You need to make payment of GHS ${exam?.isSemester ? "10.00" : "5.00"
                         } to view this exam results.`,
                     //   showCancelButton: true,
                     //   cancelButtonText: "Close",
@@ -323,7 +323,9 @@ export default function StatementOfResults() {
     const handleExamSelect = (e: SelectChangeEvent) => {
         const examId = e.target.value as string;
         // setValue("exam", examId);
-        setSelectedExamData(fetchedExams.find((exam) => exam._id === examId));
+        const exam = fetchedExams.find((exam) => exam._id === examId)
+        setSelectedExamData(exam)
+        checkPaymentStatus(exam)
     };
     const handleFetchData = async (token: string) => {
         try {
@@ -444,7 +446,7 @@ export default function StatementOfResults() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12} sm="auto">
+                    {/* <Grid item xs={12} sm="auto">
                         <Button
                             type="button"
                             onClick={checkPaymentStatus}
@@ -459,7 +461,7 @@ export default function StatementOfResults() {
                         >
                             {loading ? "Loading..." : "Submit"}
                         </Button>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
 
                 <Divider />
